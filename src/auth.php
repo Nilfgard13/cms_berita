@@ -26,10 +26,9 @@ function register_user(string $email, string $username, string $password, bool $
 
 function find_user_by_username(string $username)
 {
-    $sql = 'SELECT username, password
+    $sql = 'SELECT *
             FROM users
             WHERE username=:username';
-
     $statement = db()->prepare($sql);
     $statement->bindValue(':username', $username, PDO::PARAM_STR);
     $statement->execute();
@@ -90,43 +89,13 @@ function current_user()
 function find_role_by_username(string $username): ?bool
 {
     $sql = "SELECT is_admin FROM users WHERE username = :username";
-
     $statement = db()->prepare($sql);
     $statement->bindValue(':username', $username, PDO::PARAM_STR);
     $statement->execute();
-
     $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if ($result) {
-        return $result['is_admin']; // Assuming is_admin is a boolean flag
+    if ($result !== false) {
+        return $_SESSION['is_admin'] == $result; // Mengasumsikan is_admin adalah flag boolean
     } else {
-        return null; // User not found
+        return null; // User tidak ditemukan
     }
 }
-
-function check_user_role(string $username, string $password): ?bool
-{
-    $user = find_role_by_username($username);
-
-    // if user found, check the password
-    // if ($user && password_verify($password, $user['password']) && $user['is_admin']===1) {
-
-    //     // prevent session fixation attack
-    //     session_regenerate_id();
-
-    //     // set username in the session
-    //     $_SESSION['username'] = $user['username'];
-    //     $_SESSION['user_id']  = $user['id'];
-    //     $_SESSION['is_admin'] = 1;
-
-
-    //     return true;
-    // }
-
-    $_SESSION['username'] = $user['username'];
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['is_admin'] = 1;
-    return false;
-}
-
-?>

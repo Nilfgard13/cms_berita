@@ -1,7 +1,7 @@
 <?php
 
 if (is_user_logged_in()) {
-    redirect_to('index.php');
+    //redirect_to('dashboard_user.php');
 }
 
 $inputs = [];
@@ -29,19 +29,15 @@ if (is_post_request()) {
         ]);
     }
     // login successfully
-    redirect_to('index.php');
-    $is_admin = check_user_role($inputs['username'], $inputs['password']);
-    if ($is_admin === true) {
-        // Display admin dashboard
+    $isAdmin = find_role_by_username($inputs['username']);
+    // redirect_to('index.php');
+    
+    if ($isAdmin === null) {
+        echo "User not found.";
+    } elseif ($isAdmin == 1) {
         redirect_to('dashboard_admin.php');
-        // ... Admin functionalities ...
-    } elseif ($is_admin === false) {
-        // Display user dashboard
-        redirect_to('dashboard_user.php');
-        // ... User functionalities ...
     } else {
-        // Invalid credentials
-        echo "Invalid username or password.";
+        redirect_to('dashboard_user.php');
     }
 
 } else if (is_get_request()) {
