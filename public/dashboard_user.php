@@ -4,8 +4,6 @@ require_login();
 ?>
 
 <?php view('header_admin', ['title' => 'Dashboard']) ?>
-<p>Welcome (users) <?= current_user() ?> <a href="logout.php">Logout</a></p>
-
 <div class="container-scroller">
   <!-- partial:partials/_navbar.html -->
   <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -29,25 +27,6 @@ require_login();
         </form>
       </div>
       <ul class="navbar-nav navbar-nav-right">
-        <li class="nav-item nav-profile dropdown">
-          <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <div class="nav-profile-img">
-              <img src="../src/assets/images/faces/face1.jpg" alt="image">
-              <span class="availability-status online"></span>
-            </div>
-            <div class="nav-profile-text">
-              <p class="mb-1 text-black">David Greymaax</p>
-            </div>
-          </a>
-          <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-            <a class="dropdown-item" href="#">
-              <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="logout.php">
-              <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
-          </div>
-        </li>
         <li class="nav-item d-none d-lg-block full-screen-link">
           <a class="nav-link">
             <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
@@ -162,123 +141,13 @@ require_login();
     </div>
   </nav>
   <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
+  <div class="container-fluid page-body-wrapper align-self-center">
     <!-- partial:partials/_sidebar.html -->
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
-      <ul class="nav">
-        <li class="nav-item nav-profile">
-          <a href="#" class="nav-link">
-            <div class="nav-profile-image">
-              <img src="../src/assets/images/faces/face1.jpg" alt="profile" />
-              <span class="login-status online"></span>
-              <!--change to offline or busy as needed-->
-            </div>
-            <div class="nav-profile-text d-flex flex-column">
-              <span class="font-weight-bold mb-2">David Grey. H</span>
-              <span class="text-secondary text-small">Project Manager</span>
-            </div>
-            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="dashboard_admin.php">
-            <span class="menu-title">Dashboard</span>
-            <i class="mdi mdi-home menu-icon"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-            <span class="menu-title">Basic UI Elements</span>
-            <i class="menu-arrow"></i>
-            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-          </a>
-          <div class="collapse" id="ui-basic">
-            <ul class="nav flex-column sub-menu">
-              <li class="nav-item">
-                <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </nav>
+
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
-        <div class="row">
-          <div class="col-12 grid-margin">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Recent Tickets</h4>
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th> Assignee </th>
-                        <th> Subject </th>
-                        <th> Status </th>
-                        <th> Last Update </th>
-                        <th> Tracking ID </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <p class="me-2">David Grey</p>
-                        </td>
-                        <td> Fund is not recieved </td>
-                        <td>
-                          <label class="badge badge-gradient-success">DONE</label>
-                        </td>
-                        <td> Dec 5, 2017 </td>
-                        <td> WD-12345 </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p class="me-2">David Grey</p>
-                        </td>
-                        <td> High loading time </td>
-                        <td>
-                          <label class="badge badge-gradient-warning">PROGRESS</label>
-                        </td>
-                        <td> Dec 12, 2017 </td>
-                        <td> WD-12346 </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p class="me-2">David Grey</p>
-                        </td>
-                        <td> Website down for one week </td>
-                        <td>
-                          <label class="badge badge-gradient-info">ON HOLD</label>
-                        </td>
-                        <td> Dec 16, 2017 </td>
-                        <td> WD-12347 </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p class="me-2">David Grey</p>
-                        </td>
-                        <td> Loosing control on server </td>
-                        <td>
-                          <label class="badge badge-gradient-danger">REJECTED</label>
-                        </td>
-                        <td> Dec 3, 2017 </td>
-                        <td> WD-12348 </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  
       </div>
 
       <!-- content-wrapper ends -->
@@ -296,15 +165,6 @@ require_login();
     <!-- main-panel ends -->
   </div>
   <!-- page-body-wrapper ends -->
-</div>
-
-<div>
-    <?php
-        // $test=$_SESSION['is_admin'];
-        // echo $test;
-        // echo $_SESSION['username'];
-        // echo $_SESSION['user_id'];
-    ?>
 </div>
 
 <?php view('footer_admin') ?>

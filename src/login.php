@@ -30,13 +30,18 @@ if (is_post_request()) {
     }
     // login successfully
     $isAdmin = find_role_by_username($inputs['username']);
+    $username = find_user_by_username($inputs['username']);
+
+    
     // redirect_to('index.php');
     
     if ($isAdmin === null) {
         echo "User not found.";
-    } elseif ($isAdmin == 1) {
+    } elseif ($username['is_admin'] == 1) {
+        $_SESSION['username'] = $username['username'];
         redirect_to('dashboard_admin.php');
     } else {
+        $_SESSION['username'] = $username['username'];
         redirect_to('dashboard_user.php');
     }
 

@@ -99,3 +99,34 @@ function find_role_by_username(string $username): ?bool
         return null; // User tidak ditemukan
     }
 }
+
+function find_id_by_username(string $username)
+{
+    $sql = 'SELECT id
+            FROM users
+            WHERE username=:username';
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':username', $username, PDO::PARAM_STR);
+    $statement->execute();
+
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
+function createArticle(int $id_users, string $nama_penulis, string $email, string $gender, string $alamat_penulis, string $judul_artikel, string $gambar, string $tema_artikel, string $isi){
+    $sql = 'INSERT INTO artikel (id_users, nama_penulis, email, gender, alamat_penulis, judul_artikel, gambar, tema_artikel, isi) 
+    VALUES (:id_users, :nama_penulis, :email, :gender, :alamat_penulis, :judul_artikel, :gambar, :tema_artikel, :isi)';
+
+    $statement = db()->prepare($sql);
+
+    $statement->bindValue(':nama_penulis', $nama_penulis, PDO::PARAM_STR);
+    $statement->bindValue(':email', $email, PDO::PARAM_STR);
+    $statement->bindValue(':gender', $gender, PDO::PARAM_STR);
+    $statement->bindValue(':alamat_penulis', $alamat_penulis, PDO::PARAM_STR);
+    $statement->bindValue(':judul_artikel', (int) $judul_artikel, PDO::PARAM_INT);
+    $statement->bindValue(':gambar', (int) $gambar, PDO::PARAM_INT);
+    $statement->bindValue(':tema_artikel', (int) $tema_artikel, PDO::PARAM_INT);
+    $statement->bindValue(':isi', (int) $isi, PDO::PARAM_INT);
+
+
+    return $statement->execute();
+}
